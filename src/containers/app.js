@@ -8,6 +8,8 @@ import {
     updateWallet
 } from '../actions'
 
+import SelectETF from '../components/select-etf'
+
 const monthList = ['января', 'февраля', 'марта', 'апреля', 'мая', 'июня', 'июля', 'августа', 'сентября', 'октября', 'ноября', 'декабря']
 
 class App extends Component {
@@ -88,13 +90,7 @@ class App extends Component {
         return (
             <div>
                 <span>Если бы я покупал</span>
-                <select onChange={ changeETF } value={ selected }>
-                    { ETFIDs.map(id => (
-                        <option key={ id } value={ id }>
-                            { ETFNames[id] }
-                        </option>
-                    )) }
-                </select>
+                <SelectETF />
                 <span>каждый месяц на $</span>
                 <input type="number" onChange={ changeSum } value={ this.props.sum } />
                 <span>начиная с</span>
