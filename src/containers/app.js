@@ -25,16 +25,19 @@ class App extends Component {
             sum
         } = nextProps
 
-        console.log('will receive props')
+        const etfChanged = selected !== this.props.selected
+        const sumChanged = sum !== this.props.sum
+        const periodChanged = period !== this.props.period
+        const candlesChanged = candles !== this.props.candles
+        const candlesNotEmpty = candles && candles.length
+        const candlesUpdated = candlesChanged && candlesNotEmpty
+        const somethingChanged = candlesChanged || sumChanged || periodChanged
 
-        if (selected !== this.props.selected) {
+        if (etfChanged) {
             dispatch(fetchETFIfNeeded(selected))
         }
 
-        console.log(sum, this.props.sum)
-
-        if (sum !== this.props.sum) {
-            console.log('HERE!')
+        if (somethingChanged) {
             const availableCandles = candles.filter(candle => candle[0] >= period)
             dispatch(updateWallet(availableCandles, sum))
         }
@@ -93,7 +96,7 @@ class App extends Component {
                     )) }
                 </select>
                 <span>каждый месяц на $</span>
-                <input type="number" onChange={ changeSum } />
+                <input type="number" onChange={ changeSum } value={ this.props.sum } />
                 <span>начиная с</span>
                 <select onChange={ changePeriod }>
                     { this.props.candles.map(candle => (

@@ -14,7 +14,7 @@ export const selectETF = (state = {
     ETFNames,
     selected: 'fxau',
     period: 0,
-    sum: 0
+    sum: 100
 }, action) => {
     console.log(action)
     switch (action.type) {
