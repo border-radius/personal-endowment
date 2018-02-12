@@ -22,7 +22,7 @@ const etf = (state = {
     }
 }
 
-export const candlesByETF = (state = {}, action) => {
+export const history = (state = {}, action) => {
     switch (action.type) {
         case RECEIVE_ETF:
         case REQUEST_ETF:

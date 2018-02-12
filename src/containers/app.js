@@ -118,7 +118,7 @@ class App extends Component {
 }
 
 const mapStateToProps = state => {
-    const { select, candlesByETF, wallet } = state
+    const { select, history, wallet } = state
     const {
         ETFNames,
         selected,
@@ -135,7 +135,7 @@ const mapStateToProps = state => {
         isFetching,
         lastUpdated,
         candles
-    } = candlesByETF[selected] || {
+    } = history[selected] || {
         isFetching: true,
         candles: []
     }
