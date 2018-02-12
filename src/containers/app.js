@@ -4,7 +4,8 @@ import {
     selectETF,
     fetchETFIfNeeded,
     selectPeriod,
-    selectSum
+    selectSum,
+    updateWallet
 } from '../actions'
 
 const monthList = ['января', 'февраля', 'марта', 'апреля', 'мая', 'июня', 'июля', 'августа', 'сентября', 'октября', 'ноября', 'декабря']
@@ -24,8 +25,18 @@ class App extends Component {
             sum
         } = nextProps
 
+        console.log('will receive props')
+
         if (selected !== this.props.selected) {
             dispatch(fetchETFIfNeeded(selected))
+        }
+
+        console.log(sum, this.props.sum)
+
+        if (sum !== this.props.sum) {
+            console.log('HERE!')
+            const availableCandles = candles.filter(candle => candle[0] >= period)
+            dispatch(updateWallet(availableCandles, sum))
         }
     }
 
@@ -91,7 +102,7 @@ class App extends Component {
 }
 
 const mapStateToProps = state => {
-    const { selectETF, candlesByETF } = state
+    const { selectETF, candlesByETF, wallet } = state
     const {
         ETFNames,
         selected,
@@ -120,7 +131,8 @@ const mapStateToProps = state => {
         sum,
         candles,
         isFetching,
-        lastUpdated
+        lastUpdated,
+        wallet
     }
 }
 
