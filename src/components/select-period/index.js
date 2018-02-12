@@ -21,7 +21,6 @@ class SelectPeriod extends Component {
     render() {
         const changePeriod = this.changePeriod.bind(this)
         const getPeriodName = this.getPeriodName.bind(this)
-        console.log(this.props)
 
         return (
             <select onChange={ changePeriod }>

@@ -10,13 +10,9 @@ import {
 
 import SelectETF from '../components/select-etf'
 import SelectPeriod from '../components/select-period'
+import InputSum from '../components/input-sum'
 
 class App extends Component {
-    componentDidMount() {
-        const { dispatch, selected } = this.props
-        dispatch(fetchETFIfNeeded(selected))
-    }
-
     componentWillReceiveProps(nextProps) {
         const {
             dispatch,
@@ -44,18 +40,11 @@ class App extends Component {
         }
     }
 
-    changeSum(event) {
-        const nextSum = event.target.value
-        this.props.dispatch(selectSum(nextSum))
-    }
-
     render() {
         const styles = {
             whiteSpace: 'pre-wrap',
             wordBreak: 'break-all'
         }
-
-        const changeSum = this.changeSum.bind(this)
 
         const spent = this.props.wallet.spent
         const worth = this.props.wallet.worth.toFixed(2)
@@ -68,7 +57,7 @@ class App extends Component {
                 <span>Если бы я покупал</span>
                 <SelectETF />
                 <span>каждый месяц на $</span>
-                <input type="number" onChange={ changeSum } value={ this.props.sum } />
+                <InputSum />
                 <span>начиная с</span>
                 <SelectPeriod />
                 <span>я бы потратил в сумме ${ spent }</span>
