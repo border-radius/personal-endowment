@@ -76,8 +76,15 @@ class App extends Component {
         const changePeriod = this.changePeriod.bind(this)
         const changeSum = this.changeSum.bind(this)
 
+        const spent = this.props.wallet.spent
+        const worth = this.props.wallet.worth.toFixed(2)
+        const profit = this.props.wallet.profit.toFixed(2)
+        const profit_per_month = this.props.wallet.profit_per_month.toFixed(2)
+        const type = profit > 0 ? 'больше' : 'меньше'
+
         return (
             <div>
+                <span>Если бы я покупал</span>
                 <select onChange={ changeETF } value={ selected }>
                     { ETFIDs.map(id => (
                         <option key={ id } value={ id }>
@@ -85,6 +92,9 @@ class App extends Component {
                         </option>
                     )) }
                 </select>
+                <span>каждый месяц на $</span>
+                <input type="number" onChange={ changeSum } />
+                <span>начиная с</span>
                 <select onChange={ changePeriod }>
                     { this.props.candles.map(candle => (
                         <option key={ candle[0] } value={ candle[0] }>
@@ -92,7 +102,10 @@ class App extends Component {
                         </option>
                     ))}
                 </select>
-                <input type="number" onChange={ changeSum } />
+                <span>я бы потратил в сумме ${ spent }</span>
+                <span>и имел бы сейчас портфель стоимостью ${ worth }</span>
+                <span>что на ${ profit } { type } чем я вложил.</span>
+                <span>Средняя доходность ${ profit_per_month } в месяц.</span>
                 <pre style={ styles }>
                     { JSON.stringify(this.props) }
                 </pre>

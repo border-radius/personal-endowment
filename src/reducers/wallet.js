@@ -4,7 +4,10 @@ export const wallet = (state = {
     amounts: [],
     length: 0,
     spent: 0,
-    worth: 0
+    worth: 0,
+    profit: 0,
+    profit_per_month: 0,
+    interest: 0
 }, action) => {
     switch (action.type) {
         case CLEAR_WALLET:
@@ -12,7 +15,10 @@ export const wallet = (state = {
                 amounts: [],
                 length: 0,
                 spent: 0,
-                worth: 0
+                worth: 0,
+                profit: 0,
+                profit_per_month: 0,
+                interest: 0
             }
         case ADD_TO_WALLET:
             const amount = action.sum / action.price
@@ -21,12 +27,18 @@ export const wallet = (state = {
             const worth = total * action.price
             const length = amounts.length
             const spent = length * action.sum
+            const profit = worth - spent
+            const profit_per_month = profit / length
+            const interest = profit / spent
 
             return {
                 amounts,
                 length,
                 spent,
-                worth
+                worth,
+                profit,
+                profit_per_month,
+                interest
             }
         default:
             return state
