@@ -7,6 +7,8 @@ import {
     selectSum
 } from '../actions'
 
+const monthList = ['января', 'февраля', 'марта', 'апреля', 'мая', 'июня', 'июля', 'августа', 'сентября', 'октября', 'ноября', 'декабря']
+
 class App extends Component {
     componentDidMount() {
         const { dispatch, selected } = this.props
@@ -25,10 +27,6 @@ class App extends Component {
         if (selected !== this.props.selected) {
             dispatch(fetchETFIfNeeded(selected))
         }
-
-        if (period !== this.props.period || sum !== this.props.sum) {
-
-        }
     }
 
     changeETF(event) {
@@ -44,6 +42,15 @@ class App extends Component {
     changeSum(event) {
         const nextSum = event.target.value
         this.props.dispatch(selectSum(nextSum))
+    }
+
+    getPeriodName(timestamp) {
+        const date = new Date(timestamp)
+        const year = date.getFullYear()
+        const month = date.getMonth()
+        const monthName = monthList[month]
+
+        return [ monthName, year ].join(' ')
     }
 
     render() {
@@ -68,9 +75,9 @@ class App extends Component {
                     )) }
                 </select>
                 <select onChange={ changePeriod }>
-                    { this.props.periods.map(period => (
-                        <option key={ period.date } value={ period.date }>
-                            { period.string }
+                    { this.props.candles.map(candle => (
+                        <option key={ candle[0] } value={ candle[0] }>
+                            { this.getPeriodName(candle[0]) }
                         </option>
                     ))}
                 </select>
@@ -84,7 +91,7 @@ class App extends Component {
 }
 
 const mapStateToProps = state => {
-    const { selectETF, candlesByETF, periodsByETF } = state
+    const { selectETF, candlesByETF } = state
     const {
         ETFNames,
         selected,
@@ -96,6 +103,7 @@ const mapStateToProps = state => {
         period: 0,
         sum: 0
     }
+
     const {
         isFetching,
         lastUpdated,
@@ -104,7 +112,6 @@ const mapStateToProps = state => {
         isFetching: true,
         candles: []
     }
-    const periods = periodsByETF[selected] || []
 
     return {
         ETFNames,
@@ -113,8 +120,7 @@ const mapStateToProps = state => {
         sum,
         candles,
         isFetching,
-        lastUpdated,
-        periods
+        lastUpdated
     }
 }
 
