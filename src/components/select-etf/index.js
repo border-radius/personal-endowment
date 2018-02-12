@@ -8,6 +8,15 @@ class SelectETF extends Component {
         dispatch(fetchETFIfNeeded(selected))
     }
 
+    componentWillReceiveProps(nextProps) {
+        const { dispatch, selected } = nextProps
+        const etfChanged = selected !== this.props.selected
+
+        if (etfChanged) {
+            dispatch(fetchETFIfNeeded(selected))
+        }
+    }
+
     changeETF(event) {
         const nextETF = event.target.value
         this.props.dispatch(selectETF(nextETF))

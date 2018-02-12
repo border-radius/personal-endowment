@@ -1,12 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import {
-    selectETF,
-    fetchETFIfNeeded,
-    selectPeriod,
-    selectSum,
-    updateWallet
-} from '../actions'
+import { updateWallet } from '../actions'
 
 import SelectETF from '../components/select-etf'
 import SelectPeriod from '../components/select-period'
@@ -17,22 +11,16 @@ class App extends Component {
         const {
             dispatch,
             candles,
-            selected,
             period,
             sum
         } = nextProps
 
-        const etfChanged = selected !== this.props.selected
         const sumChanged = sum !== this.props.sum
         const periodChanged = period !== this.props.period
         const candlesChanged = candles !== this.props.candles
         const candlesNotEmpty = candles && candles.length
         const candlesUpdated = candlesChanged && candlesNotEmpty
         const somethingChanged = candlesChanged || sumChanged || periodChanged
-
-        if (etfChanged) {
-            dispatch(fetchETFIfNeeded(selected))
-        }
 
         if (somethingChanged) {
             const availableCandles = candles.filter(candle => candle[0] >= period)
@@ -41,11 +29,6 @@ class App extends Component {
     }
 
     render() {
-        const styles = {
-            whiteSpace: 'pre-wrap',
-            wordBreak: 'break-all'
-        }
-
         const spent = this.props.wallet.spent
         const worth = this.props.wallet.worth.toFixed(2)
         const profit = this.props.wallet.profit.toFixed(2)
@@ -64,9 +47,6 @@ class App extends Component {
                 <span>и имел бы сейчас портфель стоимостью ${ worth }</span>
                 <span>что на ${ profit } { type } чем я вложил.</span>
                 <span>Средняя доходность ${ profit_per_month } в месяц.</span>
-                <pre style={ styles }>
-                    { JSON.stringify(this.props) }
-                </pre>
             </div>
         )
     }
@@ -75,34 +55,17 @@ class App extends Component {
 const mapStateToProps = state => {
     const { select, history, wallet } = state
     const {
-        ETFNames,
         selected,
         period,
         sum
-    } = select || {
-        ETFNames: {},
-        selected: '',
-        period: 0,
-        sum: 0
-    }
+    } = select
 
-    const {
-        isFetching,
-        lastUpdated,
-        candles
-    } = history[selected] || {
-        isFetching: true,
-        candles: []
-    }
+    const { candles } = history[selected] || { candles: [] }
 
     return {
-        ETFNames,
-        selected,
         period,
         sum,
         candles,
-        isFetching,
-        lastUpdated,
         wallet
     }
 }
