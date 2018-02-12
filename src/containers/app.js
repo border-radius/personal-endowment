@@ -118,13 +118,13 @@ class App extends Component {
 }
 
 const mapStateToProps = state => {
-    const { selectETF, candlesByETF, wallet } = state
+    const { select, candlesByETF, wallet } = state
     const {
         ETFNames,
         selected,
         period,
         sum
-    } = selectETF || {
+    } = select || {
         ETFNames: {},
         selected: '',
         period: 0,

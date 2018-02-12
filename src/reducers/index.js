@@ -1,11 +1,11 @@
 import { combineReducers } from 'redux'
-import { selectETF } from './selectETF'
+import { select } from './select'
 import { candlesByETF } from './candlesByETF'
 import { wallet } from './wallet'
 
 const rootReducer = combineReducers({
     candlesByETF,
-    selectETF,
+    select,
     wallet
 })
 

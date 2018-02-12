@@ -10,13 +10,12 @@ const ETFNames = {
     'fxus': 'акции американских компаний'
 }
 
-export const selectETF = (state = {
+export const select = (state = {
     ETFNames,
     selected: 'fxau',
     period: 0,
     sum: 100
 }, action) => {
-    console.log(action)
     switch (action.type) {
         case SELECT_ETF:
             return {
