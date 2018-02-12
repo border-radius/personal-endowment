@@ -9,8 +9,7 @@ import {
 } from '../actions'
 
 import SelectETF from '../components/select-etf'
-
-const monthList = ['января', 'февраля', 'марта', 'апреля', 'мая', 'июня', 'июля', 'августа', 'сентября', 'октября', 'ноября', 'декабря']
+import SelectPeriod from '../components/select-period'
 
 class App extends Component {
     componentDidMount() {
@@ -45,28 +44,9 @@ class App extends Component {
         }
     }
 
-    changeETF(event) {
-        const nextETF = event.target.value
-        this.props.dispatch(selectETF(nextETF))
-    }
-
-    changePeriod(event) {
-        const nextPeriod = event.target.value
-        this.props.dispatch(selectPeriod(nextPeriod))
-    }
-
     changeSum(event) {
         const nextSum = event.target.value
         this.props.dispatch(selectSum(nextSum))
-    }
-
-    getPeriodName(timestamp) {
-        const date = new Date(timestamp)
-        const year = date.getFullYear()
-        const month = date.getMonth()
-        const monthName = monthList[month]
-
-        return [ monthName, year ].join(' ')
     }
 
     render() {
@@ -75,10 +55,6 @@ class App extends Component {
             wordBreak: 'break-all'
         }
 
-        const { ETFNames, selected } = this.props
-        const ETFIDs = Object.keys(ETFNames)
-        const changeETF = this.changeETF.bind(this)
-        const changePeriod = this.changePeriod.bind(this)
         const changeSum = this.changeSum.bind(this)
 
         const spent = this.props.wallet.spent
@@ -94,13 +70,7 @@ class App extends Component {
                 <span>каждый месяц на $</span>
                 <input type="number" onChange={ changeSum } value={ this.props.sum } />
                 <span>начиная с</span>
-                <select onChange={ changePeriod }>
-                    { this.props.candles.map(candle => (
-                        <option key={ candle[0] } value={ candle[0] }>
-                            { this.getPeriodName(candle[0]) }
-                        </option>
-                    ))}
-                </select>
+                <SelectPeriod />
                 <span>я бы потратил в сумме ${ spent }</span>
                 <span>и имел бы сейчас портфель стоимостью ${ worth }</span>
                 <span>что на ${ profit } { type } чем я вложил.</span>
