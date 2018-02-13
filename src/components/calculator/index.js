@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import InputSum from '../input-sum'
 import SelectETF from '../select-etf'
 import SelectPeriod from '../select-period'
+import Money from '../money'
 import { updateWallet } from '../../actions'
 import styles from './styles.css'
 
@@ -34,19 +35,32 @@ class Calculator extends Component {
         const profit = this.props.wallet.profit.toFixed(2)
         const profit_per_month = this.props.wallet.profit_per_month.toFixed(2)
         const type = profit > 0 ? 'больше' : 'меньше'
+        const type2 = profit > 0 ? 'дорожали' : 'дешевели'
 
         return (
             <div className={ styles.calculator }>
-                <span>Если бы я покупал</span>
-                <SelectETF />
-                <span>каждый месяц на $</span>
-                <InputSum />
-                <span>начиная с</span>
-                <SelectPeriod />
-                <span>я бы потратил в сумме ${ spent }</span>
-                <span>и имел бы сейчас портфель стоимостью ${ worth }</span>
-                <span>что на ${ profit } { type } чем я вложил.</span>
-                <span>Средняя доходность ${ profit_per_month } в месяц.</span>
+                <div className={ styles.inner }>
+                    <p>
+                        Если бы я покупал
+                        <SelectETF />
+                        каждый месяц на
+                        <InputSum />
+                        начиная с
+                        <SelectPeriod />
+                        я бы потратил в сумме
+                        <Money value={ spent } />
+                        и имел бы сейчас портфель стоимостью
+                        <Money value={ worth } />
+                        что на
+                        <Money value={ profit } abs={ true } />
+                        { type } чем я вложил.
+                    </p>
+                    <p>
+                        В среднем, мои инвестиции бы { type2 } на
+                        <Money value={ profit_per_month } abs={ true } />
+                        в месяц.
+                    </p>
+                </div>
             </div>
         )
     }

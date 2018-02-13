@@ -1,0 +1,14 @@
+.money {
+    margin: 0 7px;
+    font: 24px/1.4 'PT Mono', monospace;
+}
+
+.money_up {
+    composes: money;
+    color: #1f9531;
+}
+
+.money_down {
+    composes: money;
+    color: #951f3c;
+}
