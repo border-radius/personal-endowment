@@ -1,9 +1,11 @@
 @import url('https://fonts.googleapis.com/css?family=Lora');
 
 .calculator {
-    padding: 50px;
+    padding: 100px 50px;
     font: 24px/1.8 Lora, serif;
-    background: #f6f6e8;
+    /*background: #e8f0f6;*/
+    background: #251B26;
+    color: #ded8d8;
 }
 
 .inner {

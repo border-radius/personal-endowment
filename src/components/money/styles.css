@@ -5,10 +5,10 @@
 
 .money_up {
     composes: money;
-    color: #1f9531;
+    color: #76ED66;
 }
 
 .money_down {
     composes: money;
-    color: #951f3c;
+    color: #FE5C7F;
 }

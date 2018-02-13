@@ -1,10 +1,9 @@
 @import url('https://fonts.googleapis.com/css?family=PT+Mono');
 
 .select {
-    margin: 0 7px;
-    background: #fff;
-    color: #000;
-    border: 2px solid #333;
+    margin: 0 12px;
+    color: #fff;
+    border: 2px solid #66515a;
     overflow: hidden;
     display: inline-block;
     vertical-align: middle;
@@ -21,23 +20,23 @@
     top: 0;
     right: 0;
     bottom: 0;
-    background: #fff;
+    background: #251B26;
     pointer-events: none;
 }
 
 .select select {
     padding: 7px 15px;
     border: 0;
-    background: transparent;
-    color: #000;
+    background: #251B26;
+    color: #fff;
 }
 
 .select select:-moz-focusring {
     color: transparent;
-    text-shadow: 0 0 0 #000;
+    text-shadow: 0 0 0 #fff;
 }
 
 .select select:-moz-focusring * {
-    color: #000;
+    color: #fff;
     text-shadow: none;
 }
