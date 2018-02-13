@@ -56,7 +56,7 @@ class Calculator extends Component {
                         { type } чем я вложил.
                     </p>
                     <p>
-                        В среднем, мои инвестиции бы { type2 } на
+                        В среднем, мои инвестиции { type2 } на
                         <Money value={ profit_per_month } abs={ true } />
                         в месяц.
                     </p>
