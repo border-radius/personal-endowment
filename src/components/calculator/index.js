@@ -4,6 +4,7 @@ import InputSum from '../input-sum'
 import SelectETF from '../select-etf'
 import SelectPeriod from '../select-period'
 import { updateWallet } from '../../actions'
+import styles from './styles.css'
 
 class Calculator extends Component {
     componentWillReceiveProps(nextProps) {
@@ -35,7 +36,7 @@ class Calculator extends Component {
         const type = profit > 0 ? 'больше' : 'меньше'
 
         return (
-            <div>
+            <div className={ styles.calculator }>
                 <span>Если бы я покупал</span>
                 <SelectETF />
                 <span>каждый месяц на $</span>

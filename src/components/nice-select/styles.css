@@ -1,7 +1,10 @@
+@import url('https://fonts.googleapis.com/css?family=PT+Mono');
+
 .select {
     margin: 0 7px;
     padding: 7px 15px;
     background: #fff;
     color: #000;
     border: 1px solid #000;
+    font: 18px/1.4 'PT Mono', monospace;
 }
