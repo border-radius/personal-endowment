@@ -1,12 +1,17 @@
 import React, { Component } from 'react'
-import styles from './styles.css'
+import { number } from './styles.css'
 
 export default class NiceNumber extends Component {
     render() {
-        return <input
-            className={ styles.number }
-            type="number"
-            onChange={ this.props.onChange }
-            value={ this.props.value } />
+        const currency = this.props.currency || '$'
+        return (
+            <span className={ number }>
+                <span>{ currency }</span>
+                <input
+                    type="number"
+                    onChange={ this.props.onChange }
+                    value={ this.props.value } />
+            </span>
+        )
     }
 }
