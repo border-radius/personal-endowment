@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { selectSum } from '../../actions'
+import NiceNumber from '../nice-number'
 
 class InputSum extends Component {
     changeSum(event) {
@@ -11,9 +12,7 @@ class InputSum extends Component {
     render() {
         const changeSum = this.changeSum.bind(this)
 
-        return (
-            <input type="number" onChange={ changeSum } value={ this.props.sum } />
-        )
+        return <NiceNumber onChange={ changeSum } value={ this.props.sum } />
     }
 }
 
