@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { selectETF, fetchETFIfNeeded } from '../../actions'
+import NiceSelect from '../nice-select'
 
 class SelectETF extends Component {
     componentDidMount() {
@@ -25,19 +26,8 @@ class SelectETF extends Component {
     render() {
         const changeETF = this.changeETF.bind(this)
         const { ETFNames, selected } = this.props
-        const ETFIDs = Object.keys(ETFNames)
 
-        return (
-            <select onChange={ changeETF } value={ selected }>
-                {
-                    ETFIDs.map(id => (
-                        <option key={ id } value={ id }>
-                            { ETFNames[id] }
-                        </option>
-                    ))
-                }
-            </select>
-        )
+        return <NiceSelect onChange={ changeETF } value={ selected } options={ ETFNames } />
     }
 }
 

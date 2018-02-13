@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { selectPeriod } from '../../actions'
+import NiceSelect from '../nice-select'
 
 class SelectPeriod extends Component {
     changePeriod(event) {
@@ -20,19 +21,10 @@ class SelectPeriod extends Component {
 
     render() {
         const changePeriod = this.changePeriod.bind(this)
-        const getPeriodName = this.getPeriodName.bind(this)
+        const periods = {}
+        this.props.candles.forEach(candle => periods[candle[0]] = this.getPeriodName(candle[0]))
 
-        return (
-            <select onChange={ changePeriod }>
-                {
-                    this.props.candles.map(candle => (
-                        <option key={ candle[0] } value={ candle[0] }>
-                            { getPeriodName(candle[0]) }
-                        </option>
-                    ))
-                }
-            </select>
-        )
+        return <NiceSelect onChange= { changePeriod } options={ periods } />
     }
 }
 
